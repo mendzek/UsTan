@@ -181,48 +181,50 @@ try:
 except Exception as ex:
     pass
 dirName = filedialog.askdirectory()
-if dirName != "":
-    tempList = os.listdir(dirName)
-    r = 1
-    c = 0
-    for x in tempList:
-        tempFile = dirName + f"/{x}"
-        #temp = os.path.abspath(x)
-        tempDir = os.getcwd()
-        if CheckFileType(tempFile) == "file":
-            labelInList = tk.Label(image = fileIcon, text = f"{x}", compound = "top", width = 100 ,height = 100)
-            labelInList.bind("<Enter>", enterLeaveFile)
-            labelInList.bind("<Leave>", enterLeaveFile)
-            labelInList.bind("<ButtonRelease>", onClickFiles)
-            labelInList.pack(padx = 10,pady = 10, side = LEFT)
-            LBBList.append(labelInList)
-            FilesDict[labelInList] = tempFile
-            c+=1
-            if c == 4:
-                c=0
-                r+=1
-        elif CheckFileType(tempFile) == "dir":
-            labelInList = tk.Label(image = dirIcon, text = f"{x} directory",compound = "top", width = 100 ,height = 100)
-            labelInList.bind("<Enter>", enterLeaveDir)
-            labelInList.bind("<Leave>", enterLeaveDir)
-            labelInList.pack(padx = 10,pady = 10, side = LEFT)
-            LBBList.append(labelInList)
-            c+=1
-            if c == 4:
-                c=0
-                r+=1
-
-
-        else:
-            showerror("Ошибка","Неизвестный тип файла.")
+def FilesView(dirName):
+    if dirName != "":
+        tempList = os.listdir(dirName)
         r = 1
         c = 0
-    LB_startText.config(text = f"Файлы в папке {dirName}")
-else:
-    while(dirName == ""):
-        showerror("Ошибка","Выберите папку с файлами.")
-        dirName = filedialog.askdirectory()
+        for x in tempList:
+            tempFile = dirName + f"/{x}"
+            #temp = os.path.abspath(x)
+            tempDir = os.getcwd()
+            if CheckFileType(tempFile) == "file":
+                labelInList = tk.Label(image = fileIcon, text = f"{x}", compound = "top", width = 100 ,height = 100)
+                labelInList.bind("<Enter>", enterLeaveFile)
+                labelInList.bind("<Leave>", enterLeaveFile)
+                labelInList.bind("<ButtonRelease>", onClickFiles)
+                labelInList.pack(padx = 10,pady = 10, side = LEFT)
+                LBBList.append(labelInList)
+                FilesDict[labelInList] = tempFile
+                c+=1
+                if c == 4:
+                    c=0
+                    r+=1
+            elif CheckFileType(tempFile) == "dir":
+                labelInList = tk.Label(image = dirIcon, text = f"{x} directory",compound = "top", width = 100 ,height = 100)
+                labelInList.bind("<Enter>", enterLeaveDir)
+                labelInList.bind("<Leave>", enterLeaveDir)
+                labelInList.pack(padx = 10,pady = 10, side = LEFT)
+                LBBList.append(labelInList)
+                c+=1
+                if c == 4:
+                    c=0
+                    r+=1
 
+
+            else:
+                showerror("Ошибка","Неизвестный тип файла.")
+            r = 1
+            c = 0
+        LB_startText.config(text = f"Файлы в папке {dirName}")
+    else:
+        while(dirName == ""):
+            showerror("Ошибка","Выберите папку с файлами.")
+            dirName = filedialog.askdirectory()
+            FilesView(dirName)
+FilesView(dirName)
 BT_viewReceived.bind("<ButtonRelease>", onClickViewReceived)
 BT_choose.bind("<ButtonRelease>", onClickChoose)
 
