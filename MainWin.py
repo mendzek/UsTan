@@ -105,8 +105,8 @@ class SendWin(Tk):
         self.LB_startText.pack(anchor=NW)
         self.FrameUsers = ttk.Frame(self, borderwidth=1, relief=SOLID)
         for x in range(len(self.UsersList)):
-            self.BT_star = tk.Button(self.FrameUsers,text="star")
-            self.BT_star.grid(column=0, row=x)
+            # self.BT_star = tk.Button(self.FrameUsers,text="star")
+            # self.BT_star.grid(column=0, row=x)
             self.LB_userName = Label(self.FrameUsers, text=self.UsersList[x], font=20)
             self.LB_userName.grid(column=1, row=x)
             self.BT_check = tk.Button(self.FrameUsers, text="check")
@@ -202,22 +202,22 @@ def FilesView(dirName):
                 if c == 4:
                     c=0
                     r+=1
-            elif CheckFileType(tempFile) == "dir":
-                labelInList = tk.Label(image = dirIcon, text = f"{x} directory",compound = "top", width = 100 ,height = 100)
-                labelInList.bind("<Enter>", enterLeaveDir)
-                labelInList.bind("<Leave>", enterLeaveDir)
-                labelInList.pack(padx = 10,pady = 10, side = LEFT)
-                LBBList.append(labelInList)
-                c+=1
-                if c == 4:
-                    c=0
-                    r+=1
+            # elif CheckFileType(tempFile) == "dir":
+            #     labelInList = tk.Label(image = dirIcon, text = f"{x} directory",compound = "top", width = 100 ,height = 100)
+            #     labelInList.bind("<Enter>", enterLeaveDir)
+            #     labelInList.bind("<Leave>", enterLeaveDir)
+            #     labelInList.pack(padx = 10,pady = 10, side = LEFT)
+            #     LBBList.append(labelInList)
+            #     c+=1
+            #     if c == 4:
+            #         c=0
+            #         r+=1
 
 
-            else:
-                showerror("Ошибка","Неизвестный тип файла.")
-            r = 1
-            c = 0
+            # else:
+            #     showerror("Ошибка","Неизвестный тип файла.")
+            # r = 1
+            # c = 0
         LB_startText.config(text = f"Файлы в папке {dirName}")
     else:
         while(dirName == ""):
