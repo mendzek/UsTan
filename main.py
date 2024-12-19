@@ -1,4 +1,4 @@
 from tkinter import *
 import MainWin
 
-MainWin.root.mainloop()
+MainWin.MainWin.root.mainloop()
